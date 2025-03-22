@@ -1,4 +1,26 @@
-# AI Trading Entry Point Prediction Project
+# TradeSight-AI :: AI Trading Entry Point Prediction Project
+
+## Title
+TradeSight-AI: Intelligent Trading Entry Point Prediction
+
+## Short Description
+AI-powered trading assistant that identifies optimal market entry points with explainable rationale, technical analysis, and visual insights.
+
+## Detailed Description
+TradeSight-AI leverages machine learning to identify high-probability trading opportunities in financial markets. This project combines advanced technical analysis, machine learning, and explainable AI to provide traders with actionable insights.
+
+**Key Features:**
+- 🎯 Precise entry point detection using Random Forest models
+- 📊 Comprehensive technical indicator analysis (RSI, MACD, Bollinger Bands, etc.)
+- 📈 Interactive visualizations of predictions and backtests
+- 💡 Natural language explanations for every trading signal
+- 📝 Detailed backtesting framework with performance metrics
+- 🔄 Modular architecture for easy customization and extension
+
+Built with Python, scikit-learn, and Plotly, TradeSight-AI helps traders make more informed decisions by identifying patterns that human analysis might miss while providing clear reasoning behind each recommendation.
+
+## Tags/Topics
+`trading`, `machine-learning`, `financial-analysis`, `technical-indicators`, `python`, `data-science`, `algorithmic-trading`, `ai`, `explainable-ai`, `visualization`
 
 This project implements an AI model for determining optimal trading entry points with supporting rationale. The model uses machine learning to identify potential trading opportunities and provides clear explanations for its recommendations.
 
