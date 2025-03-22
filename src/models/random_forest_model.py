@@ -94,16 +94,35 @@ class RandomForestModel(BaseModel):
         if probabilities is None:
             probabilities = self.predict_proba(features_reshaped)[0]
         
-        # Map prediction to direction
-        if prediction == 0:
-            direction = "no significant move"
-            confidence = max(probabilities[0])
-        elif prediction == 1:
-            direction = "bullish movement"
-            confidence = probabilities[1] if len(probabilities) > 1 else probabilities[0]
-        else:  # -1
-            direction = "bearish movement"
-            confidence = probabilities[2] if len(probabilities) > 2 else probabilities[0]
+        # Map prediction to direction and get confidence based on probabilities structure
+        # Handle different types of probability structures
+        if isinstance(probabilities, (float, np.float64, np.float32)):
+            # If probabilities is a single value, use it directly
+            confidence = probabilities
+            direction = "bullish movement" if prediction == 1 else "bearish movement" if prediction == -1 else "no significant move"
+        elif hasattr(probabilities, 'ndim') and probabilities.ndim == 1:
+            # If probabilities is a 1D array
+            if prediction == 0:
+                direction = "no significant move"
+                confidence = probabilities[0] if len(probabilities) > 0 else 0.5
+            elif prediction == 1:
+                direction = "bullish movement"
+                confidence = probabilities[1] if len(probabilities) > 1 else probabilities[0]
+            else:  # -1
+                direction = "bearish movement"
+                confidence = probabilities[2] if len(probabilities) > 2 else probabilities[0]
+        else:
+            # If probabilities is a 2D array or list of lists
+            probs_row = probabilities[0] if hasattr(probabilities, '__getitem__') else probabilities
+            if prediction == 0:
+                direction = "no significant move"
+                confidence = probs_row[0] if hasattr(probs_row, '__getitem__') and len(probs_row) > 0 else 0.5
+            elif prediction == 1:
+                direction = "bullish movement"
+                confidence = probs_row[1] if hasattr(probs_row, '__getitem__') and len(probs_row) > 1 else probs_row[0]
+            else:  # -1
+                direction = "bearish movement"
+                confidence = probs_row[2] if hasattr(probs_row, '__getitem__') and len(probs_row) > 2 else probs_row[0]
         
         # Get top influential features
         feature_importance = self.get_feature_importance()
