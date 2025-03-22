@@ -1,0 +1,60 @@
+# Trading Entry Point Predictor Configuration
+
+data:
+  # Main data file for analysis
+  data_file: "USATECH.IDXUSD_Candlestick_15_M_BID_01.01.2023-18.01.2025.csv"
+  
+  # Alternative data file (higher resolution)
+  alt_data_file: "USATECH.IDXUSD_Candlestick_5_M_BID_01.01.2023-18.01.2025.csv"
+  
+  # Proportion of data to use for testing
+  test_size: 0.2
+
+model:
+  # Model type (random_forest, gradient_boosting)
+  type: "random_forest"
+  
+  # Random Forest parameters
+  n_estimators: 100
+  max_depth: 12
+  min_samples_split: 10
+  random_state: 42
+
+trading:
+  # Trading parameters (as decimals)
+  profit_target: 0.01   # 1% profit target
+  stop_loss: 0.005      # 0.5% stop loss
+  
+  # Number of periods to look ahead for target
+  future_periods: 10
+  
+  # Minimum confidence for entry points
+  confidence_threshold: 0.65
+
+features:
+  # Technical indicators to include
+  use_sma: true
+  use_ema: true
+  use_rsi: true
+  use_macd: true
+  use_bbands: true
+  use_atr: true
+  
+  # Feature engineering options
+  add_time_features: true
+  add_price_pattern_features: true
+  add_volume_features: true
+
+output:
+  # Output directory for results
+  results_dir: "results"
+  
+  # Save options
+  save_model: true
+  save_plots: true
+  save_predictions: true
+  
+  # Visualization options
+  plot_entry_points: true
+  plot_equity_curve: true
+  interactive_charts: true

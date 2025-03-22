@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Trading Example",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/trading_example.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        }
+    ]
+}
